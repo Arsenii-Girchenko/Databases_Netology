@@ -1,0 +1,43 @@
+CREATE TABLE Genres (
+	GenreID INT PRIMARY KEY,
+	Genre_name VARCHAR(100) NOT NULL,
+);
+
+CREATE TABLE Musicians (
+	MusicianID INT PRIMARY KEY,
+	Musician_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE GenreMusician (
+	MusicianID INT REFERENCES Musicians(MusicianID),
+	GenreID INT REFERENCES Genres (GenreID),
+);
+
+CREATE TABLE Albums (
+	AlbumID INT PRIMARY KEY,
+	Album_name VARCHAR(100) NOT NULL,
+	Release_year INT NOT NULL,
+);
+
+CREATE TABLE MusicianAlbum (
+	MusicianID INT REFERENCES Musicians(MusicianID),
+	AlbumID INT REFERENCES Albums (AlbumID),
+);
+
+CREATE TABLE Tracks (
+	TrackID INT PRIMARY KEY,
+	Track_name VARCHAR(100) NOT NULL,
+	AlbumID INT FOREIGN KEY REFERENCES Albums(AlbumID)
+	Track_Duration 
+);
+
+CREATE TABLE Compilation (
+	CompilationID INT PRIMARY KEY,
+	Compilation_name VARCHAR(100) NOT NULL,
+	Release_year DATE NOT NULL
+);
+
+CREATE TABLE CompilationTrack (
+	CompilationID INT REFERENCES Compilation (CompilationID),
+	TrackID INT REFERENCES Tracks (TrackID),
+);
